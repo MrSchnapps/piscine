@@ -1,0 +1,5 @@
+Credentials cache: API:57100
+        Principal: judecuyp@S19.BE
+
+  Issued                Expires               Principal
+Jul  1 10:16:50 2019  Jul  1 20:16:41 2019  krbtgt/S19.BE@S19.BE

@@ -1,0 +1,79 @@
+
+#include "libft.h"
+
+char *fonction(char *a)
+{
+	char *t;
+	t = (char *)a;
+	int i = -1;
+	while (t[++i])
+		t[i] = ft_toupper(t[i]);
+	return (t);
+}
+
+t_list	*ft_lstnew(void *content)
+{
+	t_list *new_struct;
+
+	if (!(new_struct = malloc(sizeof(t_list))))
+		return (NULL);
+	new_struct->content = content;
+	new_struct->next = NULL;
+	return (new_struct);
+}
+
+
+#include "libft.h"
+
+t_list	*ft_lstmap(t_list *lst, char *(*f)(char *))
+{
+	t_list *road;
+	t_list *new;
+	t_list *temp;
+	t_list *ptr_new;
+
+	road = lst;
+	temp = NULL;
+	new = ft_lstnew((*f)(road->content));
+	ptr_new = new;
+	road = road->next;
+	while (road)
+	{
+		temp = ft_lstnew((*f)(road->content));
+		new->next = temp;
+		new = new->next;
+		road = road->next;
+	}
+	return (ptr_new);
+}
+
+char s1[] = "Hello ";
+	char s2[] = "Cava ";
+	char s3[] = "Les  ";
+	char s4[] = "Amis ? ";
+	t_list *a = ft_lstnew(s1);
+	t_list *b = ft_lstnew(s2);
+	t_list *c = ft_lstnew(s3);
+	t_list *d = ft_lstnew(s4);
+	t_list **begin_list = &a;
+	t_list *parcours = *begin_list;
+	a->next = b;
+	b->next = c;
+	c->next = d;
+	/*printf("\nlistes chainees : %s", parcours->content);
+	t_list *e = ft_lstnew("Oh, ");
+	ft_lstadd_front(begin_list, e);
+	parcours = *begin_list;
+	printf("\nadd front : %s", parcours->content);
+	printf("\nTaille chaine : %d", ft_lstsize(parcours));
+	printf("\nLast elem : %s", ft_lstlast(parcours)->content);
+	t_list *f = ft_lstnew("Tres bien ");
+	ft_lstadd_back(begin_list, f);
+	printf("\nLast elem apres push back : %s", ft_lstlast(parcours)->content);*/
+	char *(*ft)(char *) = &fonction;
+	t_list *nouvelle = ft_lstmap(parcours, ft);
+	while (nouvelle)
+	{
+		printf("\n%s", nouvelle->content);
+		nouvelle = nouvelle->next;
+	}
